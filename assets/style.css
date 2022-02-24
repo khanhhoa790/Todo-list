@@ -73,6 +73,12 @@ input#new-task {
   float: left;
   width: 318px;
 }
+
+input#new-description {
+  float: left;
+  width: 318px;
+}
+
 p > button:hover {
   color: #0fc57c;
 }
@@ -108,6 +114,11 @@ li > .delete {
 
 li > .delete:hover {
   color: #cf2323;
+}
+
+#incomplete-tasks .task-complete {
+  text-decoration: line-through;
+  color: #888;
 }
 
 /* Completed */

@@ -1,4 +1,4 @@
-function Todo(title, description, status) {
+function Todo(title, description = "", status = "not done") {
   this.title = title;
   this.description = description;
   this.status = status;
@@ -39,31 +39,50 @@ let TodoList = [
 
   new Todo("Cereals", "Use id abc", "not done"),
 ];
-const list = document.getElementById("incomplete-tasks");
-const checkBox = document.get;
+
+const taskTitle = document.getElementById("new-task");
+const taskDescription = document.getElementById("new-description");
+const addButton = document.getElementsByTagName("button")[0];
+const incompleteTaskHolder = document.getElementById("incomplete-tasks");
+const completedTasksHolder = document.getElementById("completed-tasks");
+
+addButton.addEventListener("click", () => {
+  let todoTittle = taskTitle.value;
+  let todoDes = taskDescription.value;
+  if (todoTittle == "") {
+    alert("You need add some thing");
+  } else {
+    TodoList.push(new Todo(todoTittle, todoDes));
+    displayTasks(TodoList);
+  }
+});
 
 const displayTasks = (TodoList) => {
   const htmlString = TodoList.map((todo) => {
     return `
           <li>
               <input type="checkbox" ${todo.checkDone(todo.status)} />
-              <label>${todo.title}</label>
-              <p>${todo.description}</p>
+              <label class="task-title">${todo.title}</label>
+              <p class="task-des">${todo.description}</p>
               <button class="delete">Delete</button>
           </li>
           `;
   }).join("");
-  list.innerHTML = htmlString;
+  incompleteTaskHolder.innerHTML = htmlString;
 };
 
 displayTasks(TodoList);
 
-let taskIncomplete = function () {
-  console.log("Incomplete Task...");
-  //Mark task as incomplete.
-  //When the checkbox is unchecked
-  //Append the task list item to the #incomplete-tasks.
-  let listItem = this.parentNode;
-  incompleteTaskHolder.appendChild(listItem);
-  bindTaskEvents(listItem, taskCompleted);
-};
+let listCheckBox = document.querySelectorAll('input[type="checkbox"]');
+
+// listCheckBox.forEach((inputCheck) => {
+//   let todoTitle = document.querySelectorAll("task-title");
+//   let todoDes = document.querySelectorAll("task-des");
+
+//   console.log(todoTitle);
+//   console.log(todoDes);
+//   if (inputCheck.checked == true) {
+//     todoTitle.classList.add("task-complete");
+//     todoDes.classList.add("task-complete");
+//   }
+// });
